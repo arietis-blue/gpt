@@ -1,10 +1,10 @@
-const LINE_ACCESS_TOKEN = '+e80bcJwYg8s2uJkMGon4UFaGq9I06KG+LCvhbTBGVu7FBtHu5FbjhUc/f+/NFgV3NS/paQbP+Wvc7WvCMPQ47LbCrx/MlPMajUwfZc4XEHcTTXcwpurMrVHUNd5coa69x2BxK9cw36ozrWz1g2sEQdB04t89/1O/w1cDnyilFU=';
-const OPENAI_APIKEY = "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";
+const LINE_ACCESS_TOKEN = 'your_key';
+const OPENAI_APIKEY = "your_key";
 
 function doPost(e) {
   const event = JSON.parse(e.postData.contents).events[0];
   let userId = event.source.userId;
-  const spst = SpreadsheetApp.openById("11zjx_MZtxZr_3UY6ZOn1Uar7azurkv6BIxC7pZQJLlg");
+  const spst = SpreadsheetApp.openById("your_id");
   let sheet = spst.getSheetByName(userId);
   if (!sheet) {
     sheet = spst.insertSheet(userId);
@@ -12,7 +12,7 @@ function doPost(e) {
   let replyToken = event.replyToken;
 
   let userMessage = event.message.text;
-  const url = 'https://api.line.me/v2/bot/message/reply';
+  const url = 'link';
   if (userMessage === undefined) {
     // メッセージ以外(スタンプや画像など)が送られてきた場合
     userMessage = '？？？？';
@@ -40,7 +40,7 @@ function doPost(e) {
       "messages": prompt
     })
   }
-  const response = UrlFetchApp.fetch("https://api.openai.com/v1/chat/completions", requestOptions);
+  const response = UrlFetchApp.fetch("link", requestOptions);
   const responseText = response.getContentText();
   const json = JSON.parse(responseText);
   let text = json['choices'][0]['message']['content'].trim();
@@ -74,7 +74,7 @@ function doPost(e) {
   });
 }
 
-
+//サンプルテスト用
 // var payload = {
 //   "postData": {
 //     "contents": JSON.stringify({
